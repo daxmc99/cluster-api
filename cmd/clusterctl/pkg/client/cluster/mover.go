@@ -423,6 +423,7 @@ func (o *objectMover) deleteSourceObject(nodeToDelete *node) error {
 	}
 
 	if len(sourceObj.GetFinalizers()) > 0 {
+		// TODO Can this be cleaned up?
 		if err := cFrom.Patch(ctx, sourceObj, removeFinalizersPatch); err != nil {
 			return errors.Wrapf(err, "error removing finalizers from %q %s/%s",
 				sourceObj.GroupVersionKind(), sourceObj.GetNamespace(), sourceObj.GetName())
